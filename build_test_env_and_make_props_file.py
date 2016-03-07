@@ -12,10 +12,11 @@ def create_new_server(server_name):
     post_data={"name":server_name,"region":"nyc3","size":"1gb","image":"docker","ssh_keys":["1734092"],"backups":False,"ipv6":False,"user_data":None,"private_networking":None}
     new_server_response = requests.post('https://api.digitalocean.com/v2/droplets', json=post_data, headers=headers);
     print('Build server ' + server_name + ' responded with ' + str(new_server_response.status_code))
-    return str(droplet['networks']['v4'][0]['ip_address'])
+    print(new_server_response.text)
+    return str(new_server_response.json()['droplet']['id'])
 
 
-test_recipe_ip = create_new_server(server_name='TEST-ENV-RECIPE-SERVICE')
+test_recipe_id = create_new_server(server_name='TEST-ENV-RECIPE-SERVICE')
 # create_new_server(server_name='TEST-ENV-RECIPE-WEB')
 
 
@@ -29,11 +30,18 @@ while all_servers_ready == False:
             print('Waiting for droplet ' + str(droplet['name']) + '(' + droplet['status'] + ')')
     if all_servers_ready == False:
         time.sleep(5)
-        
+
+test_recipe_ip = ''   
 print('All droplets are ready to go!')
 for droplet in getDropletsResponse.json()['droplets']:
-    print(str(droplet['name']) + ' | ' + str(droplet['id']) + ' | ' + str(droplet['networks']['v4'][0]['ip_address']) + ' ' + str(droplet['networks']['v4'][0]['type']))
-        
+    ip = str(droplet['networks']['v4'][0]['ip_address'])
+    ip_type = str(droplet['networks']['v4'][0]['type'])
+    id = str(droplet['id'])
+    if id == test_recipe_id:
+        test_recipe_ip = ip
+    print(str(droplet['name']) + ' | ' + id + ' | ' + ip + ' ' + ip_type)
+
+test_recipe_ip        
 file = open('env.props', 'w')
 file.write('TEST=hi, its me!\n')
 file.write('SSH_HOSTNAME=' + test_recipe_ip + '\n')
