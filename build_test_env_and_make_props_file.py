@@ -16,8 +16,8 @@ def create_new_server(server_name):
     return str(new_server_response.json()['droplet']['id'])
 
 
-test_recipe_id = create_new_server(server_name='TEST-ENV-RECIPE-SERVICE')
-# create_new_server(server_name='TEST-ENV-RECIPE-WEB')
+test_recipe_service_id = create_new_server(server_name='TEST-ENV-RECIPE-SERVICE')
+test_recipe_web_id = create_new_server(server_name='TEST-ENV-RECIPE-WEB')
 
 
 all_servers_ready = False
@@ -30,21 +30,27 @@ while all_servers_ready == False:
             print('Waiting for droplet ' + str(droplet['name']) + '(' + droplet['status'] + ')')
     if all_servers_ready == False:
         time.sleep(5)
-
-test_recipe_ip = ''   
 print('All droplets are ready to go!')
+
+test_recipe_service_ip = ''   
+test_recipe_web_ip = ''   
 for droplet in getDropletsResponse.json()['droplets']:
     ip = str(droplet['networks']['v4'][0]['ip_address'])
     ip_type = str(droplet['networks']['v4'][0]['type'])
     id = str(droplet['id'])
-    if id == test_recipe_id:
-        test_recipe_ip = ip
+    if id == test_recipe_service_id:
+        test_recipe_service_ip = ip
+        
+    if id == test_recipe_web_id:
+        test_recipe_web_ip = ip
+        
     print(str(droplet['name']) + ' | ' + id + ' | ' + ip + ' ' + ip_type)
 
-test_recipe_ip        
+test_recipe_service_ip        
 file = open('env.props', 'w')
 file.write('TEST=hi, its me!\n')
-file.write('SSH_HOSTNAME=' + test_recipe_ip + '\n')
+file.write('SERVICE_IP=' + test_recipe_service_ip + '\n')
+file.write('WEB_IP=' + test_recipe_web_ip + '\n')
 file.close()
 print('done creating file')
 
