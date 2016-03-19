@@ -12,7 +12,7 @@ def create_new_server(server_name):
     post_data={"name":server_name,"region":"nyc3","size":"1gb","image":"docker","ssh_keys":["1734160"],"backups":False,"ipv6":False,"user_data":None,"private_networking":None}
     new_server_response = requests.post('https://api.digitalocean.com/v2/droplets', json=post_data, headers=headers);
     print('Build server ' + server_name + ' responded with ' + str(new_server_response.status_code))
-    print(new_server_response.text)
+#     print(new_server_response.text)
     return str(new_server_response.json()['droplet']['id'])
 
 
