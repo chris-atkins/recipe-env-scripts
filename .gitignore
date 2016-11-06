@@ -1,3 +1,5 @@
 env.props
 .project
 .pydevproject
+.idea
+recipe-env-scripts.iml
