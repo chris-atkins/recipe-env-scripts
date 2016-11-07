@@ -8,6 +8,7 @@ headers = {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + toke
 web_ip = os.environ['WEB_IP']
 number_of_servers = os.environ['NUMBER_OF_TEST_SERVERS']
 number_of_users = os.environ['NUMBER_OF_SIMULATED_USERS_PER_SERVER']
+time_between_users = os.environ['TIME_BETWEEN_USERS_IN_SECONDS']
 time_to_run_in_seconds = os.environ['TIME_TO_RUN_IN_SECONDS']
 cert_path = os.environ['CERT_PATH']
 workspace = os.environ['WORKSPACE']
@@ -67,7 +68,7 @@ def start_testing_on_all_servers(server_ips):
     time.sleep(5)
     print('starting testing on all servers')
     for ip in server_ips:
-        command = 'ssh -o StrictHostKeyChecking=no -i ' + cert_path + ' root@' + ip + ' "python /root/run_load_test.py ' + number_of_users + ' ' + web_ip + ' > log.txt 2> error.txt &"'
+        command = 'ssh -o StrictHostKeyChecking=no -i ' + cert_path + ' root@' + ip + ' "python /root/run_load_test.py ' + number_of_users + ' ' + web_ip + ' ' + time_between_users + ' > log.txt 2> error.txt &"'
         print('Running command: ' + command)
         os.system(command)
 
