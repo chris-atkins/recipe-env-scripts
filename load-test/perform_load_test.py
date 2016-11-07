@@ -55,7 +55,7 @@ def find_load_test_server_ips():
     return ip_addresses
 
 def deploy_code_to_servers(server_ips):
-    time.sleep(15)
+    time.sleep(25)
     print('deploying code to servers')
     for ip in server_ips:
         print('deploying to ' + ip)
@@ -64,6 +64,7 @@ def deploy_code_to_servers(server_ips):
         os.system(command)
 
 def start_testing_on_all_servers(server_ips):
+    time.sleep(5)
     print('starting testing on all servers')
     for ip in server_ips:
         command = 'ssh  -i ' + cert_path + ' root@' + ip + ' "python /root/run_load_test.py ' + number_of_users + ' ' + web_ip + ' > log.txt 2> error.txt &"'
@@ -88,7 +89,7 @@ def end_testing_when_time_expires(time_to_run_in_seconds):
 
 
 
-print('Running Load Test at ' + web_ip + ' with ' + number_of_servers + ' servers, each simulating ' + number_of_users + ' users.')
+print('Running Load Test against ' + web_ip + ' with ' + number_of_servers + ' servers, each simulating ' + number_of_users + ' users.')
 create_test_servers(number_of_servers=number_of_servers)
 server_ips = find_load_test_server_ips()
 deploy_code_to_servers(server_ips=server_ips)
