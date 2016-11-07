@@ -28,7 +28,6 @@ def wait_until_all_servers_are_ready():
                 print('Waiting for droplet ' + str(droplet['name']) + '(' + droplet['status'] + ')')
         if all_servers_ready == False:
             time.sleep(5)
-    print(str(getDropletsResponse.json()))
     print('All load test runner servers are ready to go!')
 
 def create_test_servers(number_of_servers):
@@ -56,6 +55,7 @@ def find_load_test_server_ips():
     return ip_addresses
 
 def deploy_code_to_servers(server_ips):
+    time.sleep(15)
     print('deploying code to servers')
     for ip in server_ips:
         print('deploying to ' + ip)
@@ -65,8 +65,12 @@ def deploy_code_to_servers(server_ips):
 
 def start_testing_on_all_servers(server_ips):
     print('starting testing on all servers')
+    for ip in server_ips:
+        command = 'ssh  -i ' + cert_path + ' root@' + ip + ' "python /root/run_load_test.py ' + number_of_users + ' ' + web_ip + ' > log.txt 2> error.txt &"'
+        print('Running command: ' + command)
+        os.system(command)
 
-def end_testing_when_time_expires(server_ips, time_to_run_in_seconds):
+def end_testing_when_time_expires(time_to_run_in_seconds):
     time.sleep(float(time_to_run_in_seconds))
     droplets = {}
     getDropletsResponse = requests.get('https://api.digitalocean.com/v2/droplets?page=1&per_page=100', headers=headers)
@@ -89,5 +93,5 @@ create_test_servers(number_of_servers=number_of_servers)
 server_ips = find_load_test_server_ips()
 deploy_code_to_servers(server_ips=server_ips)
 start_testing_on_all_servers(server_ips=server_ips)
-end_testing_when_time_expires(server_ips=server_ips, time_to_run_in_seconds=time_to_run_in_seconds)
+end_testing_when_time_expires(time_to_run_in_seconds=time_to_run_in_seconds)
 print('Done running Load Test - remember to delete the grafana container after inspecting the results.')
