@@ -67,7 +67,7 @@ def start_testing_on_all_servers(server_ips):
     time.sleep(5)
     print('starting testing on all servers')
     for ip in server_ips:
-        command = 'ssh  -i ' + cert_path + ' root@' + ip + ' "python /root/run_load_test.py ' + number_of_users + ' ' + web_ip + ' > log.txt 2> error.txt &"'
+        command = 'ssh -o StrictHostKeyChecking=no -i ' + cert_path + ' root@' + ip + ' "python /root/run_load_test.py ' + number_of_users + ' ' + web_ip + ' > log.txt 2> error.txt &"'
         print('Running command: ' + command)
         os.system(command)
 
