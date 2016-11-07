@@ -3,3 +3,4 @@ env.props
 .pydevproject
 .idea
 recipe-env-scripts.iml
+cert/
