@@ -13,8 +13,9 @@ class SingleUser(Thread):
         self.base_url = 'http://' + web_ip + ':8000'
 
     def run(self):
-        while(True):
-            self.runSingleUserForever()
+        self.runSingleUserForever()
+        # while(True):
+        #     self.runSingleUserForever()
 
     def random_string(self, length):
         return ''.join(random.choice(string.lowercase) for i in range(length))
@@ -75,15 +76,18 @@ class SingleUser(Thread):
 
     def header(self, user_id=None):
         if user_id is None:
+            print('NONE')
             return {'Content-Type': 'application/json'}
         else:
+            print('user_id: ' + user_id)
             return {'Content-Type': 'application/json', 'RequestingUser': user_id}
 
 
     def getRecipeList(self, user_id):
         try:
             print('Thread ' + str(self.thread_id) + ': GET Recipe List')
-            requests.get(self.base_url + '/api/recipe', headers=self.header(user_id=user_id))
+            response = requests.get(self.base_url + '/api/recipe', headers=self.header(user_id=user_id))
+            print(str(response.status_code) + '\n')
         except:
             return
 
@@ -91,7 +95,8 @@ class SingleUser(Thread):
     def getUserRecipeBook(self, user_id):
         try:
             print('Thread ' + str(self.thread_id) + ': GET Recipe Book')
-            requests.get(self.base_url + '/api/user/' + user_id + '/recipe-book', headers=self.header(user_id=user_id))
+            response = requests.get(self.base_url + '/api/user/' + user_id + '/recipe-book', headers=self.header(user_id=user_id))
+            print(str(response.status_code) + '\n')
         except:
             return
 
@@ -99,7 +104,8 @@ class SingleUser(Thread):
     def getUserByEmail(self, email):
         try:
             print('Thread ' + str(self.thread_id) + ': GET User by email')
-            requests.get(self.base_url + '/api/user?email=' + email, headers=self.header())
+            response = requests.get(self.base_url + '/api/user?email=' + email, headers=self.header())
+            print(str(response.status_code) + '\n')
         except:
             return
 
@@ -111,6 +117,7 @@ class SingleUser(Thread):
             response = requests.post(self.base_url + '/api/user', json=post_data, headers=self.header())
             users.append(response.json()['userId'])
             emails.append(response.json()['userEmail'])
+            print(str(response.status_code) + '\n')
         except:
             return
 
@@ -121,6 +128,7 @@ class SingleUser(Thread):
             post_data = {"recipeName": self.random_string(self.recipe_name_length()), "recipeContent": self.random_string(self.recipe_content_length())}
             response = requests.post(self.base_url + '/api/recipe', json=post_data, headers=self.header(user_id=user_id))
             recipes.append(response.json()['recipeId'])
+            print(str(response.status_code) + '\n')
         except:
             return
 
@@ -128,8 +136,9 @@ class SingleUser(Thread):
     def putRecipe(self, recipe_id, user_id):
         try:
             print('Thread ' + str(self.thread_id) + ': PUT Recipe')
-            put_data = {"recipeName": self.random_string(self.recipe_name_length()), "recipeContent": self.random_string(self.recipe_content_length())}
-            requests.put(self.base_url + '/api/recipe/' + recipe_id, json=put_data, headers=self.header(user_id=user_id))
+            put_data = {"recipeId": recipe_id, "recipeName": self.random_string(self.recipe_name_length()), "recipeContent": self.random_string(self.recipe_content_length())}
+            response = requests.put(self.base_url + '/api/recipe/' + recipe_id, json=put_data, headers=self.header(user_id=user_id))
+            print(str(response.status_code) + '\n')
         except:
             return
 
@@ -137,7 +146,8 @@ class SingleUser(Thread):
     def getRecipe(self, recipe_id, user_id):
         try:
             print('Thread ' + str(self.thread_id) + ': GET Recipe')
-            requests.get(self.base_url + '/api/recipe/' + recipe_id, headers=self.header(user_id=user_id))
+            response = requests.get(self.base_url + '/api/recipe/' + recipe_id, headers=self.header(user_id=user_id))
+            print(str(response.status_code) + '\n')
         except:
             return
 
@@ -145,7 +155,8 @@ class SingleUser(Thread):
     def getUserById(self, user_id):
         try:
             print('Thread ' + str(self.thread_id) + ': GET User')
-            requests.get(self.base_url + '/api/user/' + user_id, headers=self.header())
+            response = requests.get(self.base_url + '/api/user/' + user_id, headers=self.header())
+            print(str(response.status_code) + '\n')
         except:
             return
 
@@ -153,8 +164,9 @@ class SingleUser(Thread):
     def postUserRecipeBook(self, user_id, recipe_id):
         try:
             print('Thread ' + str(self.thread_id) + ': POST to Recipe Book')
-            post_data = {"recipe_id": recipe_id}
-            requests.post(self.base_url + '/api/user/' + user_id + '/recipe-book', json=post_data, headers=self.header(user_id=user_id))
+            post_data = {"recipeId": recipe_id}
+            response = requests.post(self.base_url + '/api/user/' + user_id + '/recipe-book', json=post_data, headers=self.header(user_id=user_id))
+            print(str(response.status_code) + '\n')
         except:
             return
 
@@ -162,7 +174,8 @@ class SingleUser(Thread):
     def deleteRecipeFromRecipeBook(self, user_id, recipe_id):
         try:
             print('Thread ' + str(self.thread_id) + ': DELETE from Recipe Book')
-            requests.delete(self.base_url + '/api/user/' + user_id + '/recipe-book/' + recipe_id, headers=self.header(user_id=user_id))
+            response = requests.delete(self.base_url + '/api/user/' + user_id + '/recipe-book/' + recipe_id, headers=self.header(user_id=user_id))
+            print(str(response.status_code) + '\n')
         except:
             return
 
@@ -171,6 +184,7 @@ class SingleUser(Thread):
         users = []
         recipes = []
         emails = []
+        time.sleep(self.random_seconds(1,3))
 
         self.postUser(users, emails)
         time.sleep(self.random_seconds(2, 5))
@@ -260,7 +274,7 @@ class SingleUser(Thread):
         self.getUserRecipeBook(self.random_user_id(users))
         time.sleep(self.random_seconds(3, 7))
 
-        self.getUserByEmail('asdfasdf')
+        self.getUserByEmail('unknownUserEmail')
         time.sleep(self.random_seconds(3, 7))
 
         self.getUserById(self.random_user_id(users))
@@ -286,6 +300,9 @@ class SingleUser(Thread):
         self.getUserRecipeBook(self.random_user_id(users))
         time.sleep(self.random_seconds(1, 2))
 
+        self.putRecipe(self.random_recipe(recipes), self.random_user_id(users))
+        time.sleep(self.random_seconds(2, 3))
+
         self.postUserRecipeBook(self.random_user_id(users), self.random_recipe(recipes))
         self.getUserRecipeBook(self.random_user_id(users))
         time.sleep(self.random_seconds(2, 4))
@@ -301,6 +318,19 @@ class SingleUser(Thread):
         self.getRecipeList(self.random_user_id(users))
         self.getUserRecipeBook(self.random_user_id(users))
         time.sleep(self.random_seconds(2, 4))
+
+        self.putRecipe(self.random_recipe(recipes), self.random_user_id(users))
+
+        print(str(self.thread_id) + ' userIds: ')
+        for user in users:
+            print(str(self.thread_id) + '      ' + user)
+        print(str(self.thread_id) + ' emails: ')
+        for email in emails:
+            print(str(self.thread_id) + '      ' + email)
+        print(str(self.thread_id) + ' recipeIds: ')
+        for recipe in recipes:
+            print(str(self.thread_id) + '      ' + recipe)
+
 
 
 
