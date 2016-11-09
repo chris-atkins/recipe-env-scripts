@@ -18,7 +18,7 @@ class SingleUser(Thread):
         #     self.runSingleUserForever()
 
     def random_string(self, length):
-        return ''.join(random.choice(string.lowercase) for i in range(length))
+        return ''.join(random.choice(string.ascii_letters) for i in range(length))
 
 
     def user_name_length(self):
