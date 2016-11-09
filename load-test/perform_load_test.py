@@ -63,12 +63,15 @@ def deploy_code_to_servers(server_ips):
         command = 'scp -r -o StrictHostKeyChecking=no -i ' + cert_path + ' ' + workspace + '/load-test/run_load_test.py' + ' root@' + ip + ':/root/run_load_test.py'
         print('Running command: ' + command)
         os.system(command)
+        command = 'ssh -o StrictHostKeyChecking=no -i ' + cert_path + ' root@' + ip + ' "sudo apt-get -y install python3-pip && python3 -m pip install --upgrade requests"'
+        print('Running command: ' + command)
+        os.system(command)
 
 def start_testing_on_all_servers(server_ips):
     time.sleep(5)
     print('starting testing on all servers')
     for ip in server_ips:
-        command = 'ssh -o StrictHostKeyChecking=no -i ' + cert_path + ' root@' + ip + ' "python /root/run_load_test.py ' + number_of_users + ' ' + web_ip + ' ' + time_between_users + ' > log.txt 2> error.txt &"'
+        command = 'ssh -o StrictHostKeyChecking=no -i ' + cert_path + ' root@' + ip + ' "python3 /root/run_load_test.py ' + number_of_users + ' ' + web_ip + ' ' + time_between_users + ' > log.txt 2> error.txt &"'
         print('Running command: ' + command)
         os.system(command)
 

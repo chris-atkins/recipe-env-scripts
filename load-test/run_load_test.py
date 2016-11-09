@@ -89,7 +89,7 @@ class SingleUser(Thread):
             response = requests.get(self.base_url + '/api/recipe', headers=self.header(user_id=user_id))
             print(str(response.status_code) + '\n')
         except Exception as e:
-            print('Exception')
+            print('Exception', e)
             return
 
 
@@ -99,7 +99,7 @@ class SingleUser(Thread):
             response = requests.get(self.base_url + '/api/user/' + user_id + '/recipe-book', headers=self.header(user_id=user_id))
             print(str(response.status_code) + '\n')
         except Exception as e:
-            print('Exception')
+            print('Exception', e)
             return
 
 
@@ -109,7 +109,7 @@ class SingleUser(Thread):
             response = requests.get(self.base_url + '/api/user?email=' + email, headers=self.header())
             print(str(response.status_code) + '\n')
         except Exception as e:
-            print('Exception')
+            print('Exception', e)
             return
 
 
@@ -122,7 +122,7 @@ class SingleUser(Thread):
             emails.append(response.json()['userEmail'])
             print(str(response.status_code) + '\n')
         except Exception as e:
-            print('Exception')
+            print('Exception', e)
             return
 
 
@@ -134,7 +134,7 @@ class SingleUser(Thread):
             recipes.append(response.json()['recipeId'])
             print(str(response.status_code) + '\n')
         except Exception as e:
-            print('Exception')
+            print('Exception', e)
             return
 
 
@@ -145,7 +145,7 @@ class SingleUser(Thread):
             response = requests.put(self.base_url + '/api/recipe/' + recipe_id, json=put_data, headers=self.header(user_id=user_id))
             print(str(response.status_code) + '\n')
         except Exception as e:
-            print('Exception')
+            print('Exception', e)
             return
 
 
@@ -155,7 +155,7 @@ class SingleUser(Thread):
             response = requests.get(self.base_url + '/api/recipe/' + recipe_id, headers=self.header(user_id=user_id))
             print(str(response.status_code) + '\n')
         except Exception as e:
-            print('Exception')
+            print('Exception', e)
             return
 
 
