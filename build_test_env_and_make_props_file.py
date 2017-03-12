@@ -8,16 +8,16 @@ print('Start building test environments')
 token = os.environ['TOKEN']
 headers = {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token}
 
-def create_new_server(server_name):
-    post_data={"name":server_name,"region":"nyc3","size":"1gb","image":"docker","ssh_keys":["1734160"],"backups":False,"ipv6":False,"user_data":None,"private_networking":None}
+def create_new_server(server_name, server_size):
+    post_data={"name":server_name,"region":"nyc3","size":server_size,"image":"docker","ssh_keys":["1734160"],"backups":False,"ipv6":False,"user_data":None,"private_networking":None}
     new_server_response = requests.post('https://api.digitalocean.com/v2/droplets', json=post_data, headers=headers);
     print('Build server ' + server_name + ' responded with ' + str(new_server_response.status_code))
 #     print(new_server_response.text)
     return str(new_server_response.json()['droplet']['id'])
 
 
-test_recipe_service_id = create_new_server(server_name='TEST-ENV-RECIPE-SERVICE')
-test_recipe_web_id = create_new_server(server_name='TEST-ENV-RECIPE-WEB')
+test_recipe_service_id = create_new_server(server_name='TEST-ENV-RECIPE-SERVICE', server_size="1gb")
+test_recipe_web_id = create_new_server(server_name='TEST-ENV-RECIPE-WEB', server_size="2gb")
 
 
 all_servers_ready = False
