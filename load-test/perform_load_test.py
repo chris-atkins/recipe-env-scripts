@@ -2,6 +2,7 @@
 import os
 import time
 import requests
+import threading
 
 token = os.environ['TOKEN']
 headers = {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token}
@@ -57,15 +58,25 @@ def find_load_test_server_ips():
 
 def deploy_code_to_servers(server_ips):
     time.sleep(25)
-    print('deploying code to servers')
+    print('deploying python and load test script to servers')
+    threads = []
     for ip in server_ips:
-        print('deploying to ' + ip)
-        command = 'scp -r -o StrictHostKeyChecking=no -i ' + cert_path + ' ' + workspace + '/load-test/run_load_test.py' + ' root@' + ip + ':/root/run_load_test.py'
-        print('Running command: ' + command)
-        os.system(command)
-        command = 'ssh -o StrictHostKeyChecking=no -i ' + cert_path + ' root@' + ip + ' "apt-get update && sudo apt-get -y install python3-pip && python3 -m pip install --upgrade requests"'
-        print('Running command: ' + command)
-        os.system(command)
+        thread = threading.Thread(target=deploy_code_to_single_server, kwargs={'ip': ip})
+        thread.setDaemon(True)
+        threads.append(thread)
+        thread.start()
+    print('waiting for servers to finish the deploy')
+    for thread in threads:
+        thread.join()
+
+def deploy_code_to_single_server(ip):
+    print('deploying to ' + ip)
+    command = 'scp -r -o StrictHostKeyChecking=no -i ' + cert_path + ' ' + workspace + '/load-test/run_load_test.py' + ' root@' + ip + ':/root/run_load_test.py'
+    print('Running command: ' + command)
+    os.system(command)
+    command = 'ssh -o StrictHostKeyChecking=no -i ' + cert_path + ' root@' + ip + ' "apt-get update && sudo apt-get -y install python3-pip && python3 -m pip install --upgrade requests"'
+    print('Running command: ' + command)
+    os.system(command)
 
 def start_testing_on_all_servers(server_ips):
     time.sleep(5)
