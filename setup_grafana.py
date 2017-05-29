@@ -23,20 +23,37 @@ print('Login response: ' + str(login_post.status_code))
 print(str(login_post.json()))
 
 
-# Add new datasource
-datasources_post = session.post(
-    os.path.join(grafana_url, 'api', 'datasources'),
-    data=json.dumps({
-        "name":"DataSource",
-        "type":"graphite",
-        "url":"http://localhost:8000",
-        "access":"proxy",
-        "jsonData":{}}),
+# See if datasource already exists -- should be with id 1
+datasource_get = session.get(
+    os.path.join(grafana_url, 'api', 'datasources', '1'),
     headers={'content-type': 'application/json'})
+print('Data Source get response: ' + str(datasource_get.status_code))
+# print(str(datasource_get.json()))
 
-print('Data Source creation response: ' + str(datasources_post.status_code))
-print(str(datasources_post.json()))
+# Add new datasource if it is not yet created
+if datasource_get.status_code is 200:
+    print('Datasource already exists - not attempting to recreate')
+else:
+    datasources_post = session.post(
+        os.path.join(grafana_url, 'api', 'datasources'),
+        data=json.dumps({
+            "name":"DataSource",
+            "type":"graphite",
+            "url":"http://localhost:8000",
+            "access":"proxy",
+            "jsonData":{}}),
+        headers={'content-type': 'application/json'})
 
+    print('Data Source creation response: ' + str(datasources_post.status_code))
+    print(str(datasources_post.json()))
+
+# Delete the dashboard if it exists
+dashboard_delete = session.delete(
+    os.path.join(grafana_url, 'api', 'dashboards', 'db', 'recipe'),
+    headers={'content-type': 'application/json'}
+)
+print('Recipe dashboard delete response:' + str(dashboard_delete.status_code))
+print(str(dashboard_delete.json()))
 
 # Add new dashboard
 dashboard_post = session.post(
