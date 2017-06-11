@@ -61,772 +61,989 @@ print(str(dashboard_delete.json()))
 # Add new dashboard
 dashboard_post = session.post(
     os.path.join(grafana_url, 'api', 'dashboards', 'db'),
-    data=json.dumps({
-        "overwrite": False,
-        "dashboard": {
-        "id": None,
-        "title": "Recipe",
-        "originalTitle": "Recipe",
-        "tags": [],
-        "style": "dark",
-        "timezone": "browser",
-        "editable": True,
-        "hideControls": False,
-        "sharedCrosshair": False,
-        "rows": [
-            {
-                "collapse": False,
-                "editable": True,
-                "height": "250px",
-                "panels": [
-                    {
-                        "aliasColors": {},
-                        "bars": False,
-                        "datasource": "DataSource",
-                        "editable": True,
-                        "error": False,
-                        "fill": 1,
-                        "grid": {
-                            "leftLogBase": 1,
-                            "leftMax": None,
-                            "leftMin": None,
-                            "rightLogBase": 1,
-                            "rightMax": None,
-                            "rightMin": None,
-                            "threshold1": None,
-                            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-                            "threshold2": None,
-                            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-                        },
-                        "id": 2,
-                        "legend": {
-                            "avg": False,
-                            "current": False,
-                            "max": False,
-                            "min": False,
-                            "show": True,
-                            "total": False,
-                            "values": False
-                        },
-                        "lines": True,
-                        "linewidth": 2,
-                        "links": [],
-                        "NonePointMode": "connected",
-                        "percentage": False,
-                        "pointradius": 5,
-                        "points": False,
-                        "renderer": "flot",
-                        "seriesOverrides": [],
-                        "span": 4,
-                        "stack": False,
-                        "steppedLine": False,
-                        "targets": [
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.getRecipes.mean, 'listRecipes')",
-                                "textEditor": False
-                            },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.getRecipe.mean, 'getRecipe')",
-                                "textEditor": False
-                            },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.postRecipe.mean, 'postRecipe')",
-                                "textEditor": False
-                            },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.deleteRecipe.mean, 'deleteRecipe')",
-                                "textEditor": False
-                            },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.putRecipe.mean, 'putRecipe')",
-                                "textEditor": False
-                            }
-                        ],
-                        "timeFrom": None,
-                        "timeShift": None,
-                        "title": "Recipe Mean Response Time",
-                        "tooltip": {
-                            "shared": True,
-                            "value_type": "cumulative"
-                        },
-                        "type": "graph",
-                        "x-axis": True,
-                        "y-axis": True,
-                        "y_formats": [
-                            "short",
-                            "short"
-                        ]
-                    },
-                    {
-                        "aliasColors": {},
-                        "bars": False,
-                        "datasource": "DataSource",
-                        "editable": True,
-                        "error": False,
-                        "fill": 1,
-                        "grid": {
-                            "leftLogBase": 1,
-                            "leftMax": None,
-                            "leftMin": None,
-                            "rightLogBase": 1,
-                            "rightMax": None,
-                            "rightMin": None,
-                            "threshold1": None,
-                            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-                            "threshold2": None,
-                            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-                        },
-                        "id": 4,
-                        "legend": {
-                            "avg": False,
-                            "current": False,
-                            "max": False,
-                            "min": False,
-                            "show": True,
-                            "total": False,
-                            "values": False
-                        },
-                        "lines": True,
-                        "linewidth": 2,
-                        "links": [],
-                        "NonePointMode": "connected",
-                        "percentage": False,
-                        "pointradius": 5,
-                        "points": False,
-                        "renderer": "flot",
-                        "seriesOverrides": [],
-                        "span": 4,
-                        "stack": False,
-                        "steppedLine": False,
-                        "targets": [
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.getRecipes.p999, 'listRecipes')",
-                                "textEditor": False
-                            },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.getRecipe.p999, 'getRecipe')",
-                                "textEditor": False
-                            },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.postRecipe.p999, 'postRecipe')",
-                                "textEditor": False
-                            },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.deleteRecipe.p999, 'deleteRecipe')",
-                                "textEditor": False
-                            },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.putRecipe.p999, 'putRecipe')",
-                                "textEditor": False
-                            }
-                        ],
-                        "timeFrom": None,
-                        "timeShift": None,
-                        "title": "Recipe P999",
-                        "tooltip": {
-                            "shared": True,
-                            "value_type": "cumulative"
-                        },
-                        "type": "graph",
-                        "x-axis": True,
-                        "y-axis": True,
-                        "y_formats": [
-                            "short",
-                            "short"
-                        ]
-                    },
-                    {
-                        "aliasColors": {},
-                        "bars": False,
-                        "datasource": "DataSource",
-                        "editable": True,
-                        "error": False,
-                        "fill": 1,
-                        "grid": {
-                            "leftLogBase": 1,
-                            "leftMax": None,
-                            "leftMin": None,
-                            "rightLogBase": 1,
-                            "rightMax": None,
-                            "rightMin": None,
-                            "threshold1": None,
-                            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-                            "threshold2": None,
-                            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-                        },
-                        "id": 5,
-                        "legend": {
-                            "avg": False,
-                            "current": False,
-                            "max": False,
-                            "min": False,
-                            "show": True,
-                            "total": False,
-                            "values": False
-                        },
-                        "lines": True,
-                        "linewidth": 2,
-                        "links": [],
-                        "NonePointMode": "connected",
-                        "percentage": False,
-                        "pointradius": 5,
-                        "points": False,
-                        "renderer": "flot",
-                        "seriesOverrides": [],
-                        "span": 4,
-                        "stack": False,
-                        "steppedLine": False,
-                        "targets": [
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.getRecipes.count, 'listRecipes')",
-                                "textEditor": False
-                            },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.getRecipe.count, 'getRecipe')",
-                                "textEditor": False
-                            },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.postRecipe.count, 'postRecipe')",
-                                "textEditor": False
-                            },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.deleteRecipe.count, 'deleteRecipe')",
-                                "textEditor": False
-                            },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.putRecipe.count, 'putRecipe')",
-                                "textEditor": False
-                            }
-                        ],
-                        "timeFrom": None,
-                        "timeShift": None,
-                        "title": "Recipe Hit Count",
-                        "tooltip": {
-                            "shared": True,
-                            "value_type": "cumulative"
-                        },
-                        "type": "graph",
-                        "x-axis": True,
-                        "y-axis": True,
-                        "y_formats": [
-                            "short",
-                            "short"
-                        ]
-                    }
-                ],
-                "title": "New row"
+    data=json.dumps(
+        {
+            "__inputs": [
+                {
+                    "name": "DS_DATASOURCE",
+                    "label": "DataSource",
+                    "description": "",
+                    "type": "datasource",
+                    "pluginId": "graphite",
+                    "pluginName": "Graphite"
+                }
+            ],
+            "__requires": [
+                {
+                    "type": "grafana",
+                    "id": "grafana",
+                    "name": "Grafana",
+                    "version": "4.2.0"
+                },
+                {
+                    "type": "panel",
+                    "id": "graph",
+                    "name": "Graph",
+                    "version": ""
+                },
+                {
+                    "type": "datasource",
+                    "id": "graphite",
+                    "name": "Graphite",
+                    "version": "1.0.0"
+                }
+            ],
+            "annotations": {
+                "list": []
             },
-            {
-                "collapse": False,
-                "editable": True,
-                "height": "250px",
-                "panels": [
-                    {
-                        "aliasColors": {},
-                        "bars": False,
-                        "datasource": "DataSource",
-                        "editable": True,
-                        "error": False,
-                        "fill": 1,
-                        "grid": {
-                            "leftLogBase": 1,
-                            "leftMax": None,
-                            "leftMin": None,
-                            "rightLogBase": 1,
-                            "rightMax": None,
-                            "rightMin": None,
-                            "threshold1": None,
-                            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-                            "threshold2": None,
-                            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-                        },
-                        "id": 3,
-                        "legend": {
-                            "avg": False,
-                            "current": False,
-                            "max": False,
-                            "min": False,
-                            "show": True,
-                            "total": False,
-                            "values": False
-                        },
-                        "lines": True,
-                        "linewidth": 2,
-                        "links": [],
-                        "NonePointMode": "connected",
-                        "percentage": False,
-                        "pointradius": 5,
-                        "points": False,
-                        "renderer": "flot",
-                        "seriesOverrides": [],
-                        "span": 4,
-                        "stack": False,
-                        "steppedLine": False,
-                        "targets": [
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.getUser.mean, 'getUserById')",
-                                "textEditor": False
+            "editable": True,
+            "gnetId": None,
+            "graphTooltip": 0,
+            "hideControls": False,
+            "id": None,
+            "links": [],
+            "refresh": "30s",
+            "rows": [
+                {
+                    "collapse": False,
+                    "height": "250px",
+                    "panels": [
+                        {
+                            "NonePointMode": "connected",
+                            "aliasColors": {},
+                            "bars": False,
+                            "datasource": "${DS_DATASOURCE}",
+                            "editable": True,
+                            "error": False,
+                            "fill": 1,
+                            "grid": {},
+                            "id": 2,
+                            "legend": {
+                                "avg": False,
+                                "current": False,
+                                "max": False,
+                                "min": False,
+                                "show": True,
+                                "total": False,
+                                "values": False
                             },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.getUserByEmail.mean, 'getUserByEmail')",
-                                "textEditor": False
+                            "lines": True,
+                            "linewidth": 2,
+                            "links": [],
+                            "nullPointMode": "null",
+                            "percentage": False,
+                            "pointradius": 5,
+                            "points": False,
+                            "renderer": "flot",
+                            "seriesOverrides": [],
+                            "span": 4,
+                            "stack": False,
+                            "steppedLine": False,
+                            "targets": [
+                                {
+                                    "refId": "A",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.getRecipes.mean, 'listRecipes')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "B",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.getRecipe.mean, 'getRecipe')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "C",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.postRecipe.mean, 'postRecipe')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "D",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.deleteRecipe.mean, 'deleteRecipe')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "E",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.putRecipe.mean, 'putRecipe')",
+                                    "textEditor": False
+                                }
+                            ],
+                            "thresholds": [],
+                            "timeFrom": None,
+                            "timeShift": None,
+                            "title": "Recipe Mean Response Time",
+                            "tooltip": {
+                                "shared": True,
+                                "sort": 0,
+                                "value_type": "cumulative"
                             },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.postUser.mean, 'postUser')",
-                                "textEditor": False
-                            }
-                        ],
-                        "timeFrom": None,
-                        "timeShift": None,
-                        "title": "User Mean Response Time",
-                        "tooltip": {
-                            "shared": True,
-                            "value_type": "cumulative"
-                        },
-                        "type": "graph",
-                        "x-axis": True,
-                        "y-axis": True,
-                        "y_formats": [
-                            "short",
-                            "short"
-                        ]
-                    },
-                    {
-                        "aliasColors": {},
-                        "bars": False,
-                        "datasource": "DataSource",
-                        "editable": True,
-                        "error": False,
-                        "fill": 1,
-                        "grid": {
-                            "leftLogBase": 1,
-                            "leftMax": None,
-                            "leftMin": None,
-                            "rightLogBase": 1,
-                            "rightMax": None,
-                            "rightMin": None,
-                            "threshold1": None,
-                            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-                            "threshold2": None,
-                            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-                        },
-                        "id": 6,
-                        "legend": {
-                            "avg": False,
-                            "current": False,
-                            "max": False,
-                            "min": False,
-                            "show": True,
-                            "total": False,
-                            "values": False
-                        },
-                        "lines": True,
-                        "linewidth": 2,
-                        "links": [],
-                        "NonePointMode": "connected",
-                        "percentage": False,
-                        "pointradius": 5,
-                        "points": False,
-                        "renderer": "flot",
-                        "seriesOverrides": [],
-                        "span": 4,
-                        "stack": False,
-                        "steppedLine": False,
-                        "targets": [
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.getUser.p999, 'getUserById')",
-                                "textEditor": False
+                            "type": "graph",
+                            "xaxis": {
+                                "mode": "time",
+                                "name": None,
+                                "show": True,
+                                "values": []
                             },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.getUserByEmail.p999, 'getUserByEmail')",
-                                "textEditor": False
+                            "yaxes": [
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                },
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                }
+                            ]
+                        },
+                        {
+                            "NonePointMode": "connected",
+                            "aliasColors": {},
+                            "bars": False,
+                            "datasource": "${DS_DATASOURCE}",
+                            "editable": True,
+                            "error": False,
+                            "fill": 1,
+                            "grid": {},
+                            "id": 4,
+                            "legend": {
+                                "avg": False,
+                                "current": False,
+                                "max": False,
+                                "min": False,
+                                "show": True,
+                                "total": False,
+                                "values": False
                             },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.postUser.p999, 'postUser')",
-                                "textEditor": False
-                            }
-                        ],
-                        "timeFrom": None,
-                        "timeShift": None,
-                        "title": "User P999",
-                        "tooltip": {
-                            "shared": True,
-                            "value_type": "cumulative"
-                        },
-                        "type": "graph",
-                        "x-axis": True,
-                        "y-axis": True,
-                        "y_formats": [
-                            "short",
-                            "short"
-                        ]
-                    },
-                    {
-                        "aliasColors": {},
-                        "bars": False,
-                        "datasource": "DataSource",
-                        "editable": True,
-                        "error": False,
-                        "fill": 1,
-                        "grid": {
-                            "leftLogBase": 1,
-                            "leftMax": None,
-                            "leftMin": None,
-                            "rightLogBase": 1,
-                            "rightMax": None,
-                            "rightMin": None,
-                            "threshold1": None,
-                            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-                            "threshold2": None,
-                            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-                        },
-                        "id": 7,
-                        "legend": {
-                            "avg": False,
-                            "current": False,
-                            "max": False,
-                            "min": False,
-                            "show": True,
-                            "total": False,
-                            "values": False
-                        },
-                        "lines": True,
-                        "linewidth": 2,
-                        "links": [],
-                        "NonePointMode": "connected",
-                        "percentage": False,
-                        "pointradius": 5,
-                        "points": False,
-                        "renderer": "flot",
-                        "seriesOverrides": [],
-                        "span": 4,
-                        "stack": False,
-                        "steppedLine": False,
-                        "targets": [
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.getUser.count, 'getUserById')",
-                                "textEditor": False
+                            "lines": True,
+                            "linewidth": 2,
+                            "links": [],
+                            "nullPointMode": "null",
+                            "percentage": False,
+                            "pointradius": 5,
+                            "points": False,
+                            "renderer": "flot",
+                            "seriesOverrides": [],
+                            "span": 4,
+                            "stack": False,
+                            "steppedLine": False,
+                            "targets": [
+                                {
+                                    "refId": "A",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.getRecipes.p999, 'listRecipes')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "B",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.getRecipe.p999, 'getRecipe')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "C",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.postRecipe.p999, 'postRecipe')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "D",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.deleteRecipe.p999, 'deleteRecipe')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "E",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.putRecipe.p999, 'putRecipe')",
+                                    "textEditor": False
+                                }
+                            ],
+                            "thresholds": [],
+                            "timeFrom": None,
+                            "timeShift": None,
+                            "title": "Recipe P999",
+                            "tooltip": {
+                                "shared": True,
+                                "sort": 0,
+                                "value_type": "cumulative"
                             },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.getUserByEmail.count, 'getUserByEmail')",
-                                "textEditor": False
+                            "type": "graph",
+                            "xaxis": {
+                                "mode": "time",
+                                "name": None,
+                                "show": True,
+                                "values": []
                             },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.postUser.count, 'postUser')",
-                                "textEditor": False
-                            }
-                        ],
-                        "timeFrom": None,
-                        "timeShift": None,
-                        "title": "User Hit Count",
-                        "tooltip": {
-                            "shared": True,
-                            "value_type": "cumulative"
+                            "yaxes": [
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                },
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                }
+                            ]
                         },
-                        "type": "graph",
-                        "x-axis": True,
-                        "y-axis": True,
-                        "y_formats": [
-                            "short",
-                            "short"
-                        ]
-                    }
-                ],
-                "title": "New row"
+                        {
+                            "NonePointMode": "connected",
+                            "aliasColors": {},
+                            "bars": False,
+                            "datasource": "${DS_DATASOURCE}",
+                            "editable": True,
+                            "error": False,
+                            "fill": 1,
+                            "grid": {},
+                            "id": 5,
+                            "legend": {
+                                "avg": False,
+                                "current": False,
+                                "max": False,
+                                "min": False,
+                                "show": True,
+                                "total": False,
+                                "values": False
+                            },
+                            "lines": True,
+                            "linewidth": 2,
+                            "links": [],
+                            "nullPointMode": "null",
+                            "percentage": False,
+                            "pointradius": 5,
+                            "points": False,
+                            "renderer": "flot",
+                            "seriesOverrides": [],
+                            "span": 4,
+                            "stack": False,
+                            "steppedLine": False,
+                            "targets": [
+                                {
+                                    "refId": "A",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.getRecipes.count, 'listRecipes')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "B",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.getRecipe.count, 'getRecipe')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "C",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.postRecipe.count, 'postRecipe')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "D",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.deleteRecipe.count, 'deleteRecipe')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "E",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeEndpoint.putRecipe.count, 'putRecipe')",
+                                    "textEditor": False
+                                }
+                            ],
+                            "thresholds": [],
+                            "timeFrom": None,
+                            "timeShift": None,
+                            "title": "Recipe Hit Count",
+                            "tooltip": {
+                                "shared": True,
+                                "sort": 0,
+                                "value_type": "cumulative"
+                            },
+                            "type": "graph",
+                            "xaxis": {
+                                "mode": "time",
+                                "name": None,
+                                "show": True,
+                                "values": []
+                            },
+                            "yaxes": [
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                },
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                }
+                            ]
+                        }
+                    ],
+                    "repeat": None,
+                    "repeatIteration": None,
+                    "repeatRowId": None,
+                    "showTitle": False,
+                    "title": "New row",
+                    "titleSize": "h6"
+                },
+                {
+                    "collapse": False,
+                    "height": "250px",
+                    "panels": [
+                        {
+                            "NonePointMode": "connected",
+                            "aliasColors": {},
+                            "bars": False,
+                            "datasource": "${DS_DATASOURCE}",
+                            "editable": True,
+                            "error": False,
+                            "fill": 1,
+                            "grid": {},
+                            "id": 3,
+                            "legend": {
+                                "avg": False,
+                                "current": False,
+                                "max": False,
+                                "min": False,
+                                "show": True,
+                                "total": False,
+                                "values": False
+                            },
+                            "lines": True,
+                            "linewidth": 2,
+                            "links": [],
+                            "nullPointMode": "null",
+                            "percentage": False,
+                            "pointradius": 5,
+                            "points": False,
+                            "renderer": "flot",
+                            "seriesOverrides": [],
+                            "span": 4,
+                            "stack": False,
+                            "steppedLine": False,
+                            "targets": [
+                                {
+                                    "refId": "A",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.getUser.mean, 'getUserById')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "B",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.getUserByEmail.mean, 'getUserByEmail')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "C",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.postUser.mean, 'postUser')",
+                                    "textEditor": False
+                                }
+                            ],
+                            "thresholds": [],
+                            "timeFrom": None,
+                            "timeShift": None,
+                            "title": "User Mean Response Time",
+                            "tooltip": {
+                                "shared": True,
+                                "sort": 0,
+                                "value_type": "cumulative"
+                            },
+                            "type": "graph",
+                            "xaxis": {
+                                "mode": "time",
+                                "name": None,
+                                "show": True,
+                                "values": []
+                            },
+                            "yaxes": [
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                },
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                }
+                            ]
+                        },
+                        {
+                            "NonePointMode": "connected",
+                            "aliasColors": {},
+                            "bars": False,
+                            "datasource": "${DS_DATASOURCE}",
+                            "editable": True,
+                            "error": False,
+                            "fill": 1,
+                            "grid": {},
+                            "id": 6,
+                            "legend": {
+                                "avg": False,
+                                "current": False,
+                                "max": False,
+                                "min": False,
+                                "show": True,
+                                "total": False,
+                                "values": False
+                            },
+                            "lines": True,
+                            "linewidth": 2,
+                            "links": [],
+                            "nullPointMode": "null",
+                            "percentage": False,
+                            "pointradius": 5,
+                            "points": False,
+                            "renderer": "flot",
+                            "seriesOverrides": [],
+                            "span": 4,
+                            "stack": False,
+                            "steppedLine": False,
+                            "targets": [
+                                {
+                                    "refId": "A",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.getUser.p999, 'getUserById')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "B",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.getUserByEmail.p999, 'getUserByEmail')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "C",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.postUser.p999, 'postUser')",
+                                    "textEditor": False
+                                }
+                            ],
+                            "thresholds": [],
+                            "timeFrom": None,
+                            "timeShift": None,
+                            "title": "User P999",
+                            "tooltip": {
+                                "shared": True,
+                                "sort": 0,
+                                "value_type": "cumulative"
+                            },
+                            "type": "graph",
+                            "xaxis": {
+                                "mode": "time",
+                                "name": None,
+                                "show": True,
+                                "values": []
+                            },
+                            "yaxes": [
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                },
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                }
+                            ]
+                        },
+                        {
+                            "NonePointMode": "connected",
+                            "alert": {
+                                "conditions": [
+                                    {
+                                        "evaluator": {
+                                            "params": [
+                                                0
+                                            ],
+                                            "type": "gt"
+                                        },
+                                        "operator": {
+                                            "type": "and"
+                                        },
+                                        "query": {
+                                            "params": [
+                                                "D",
+                                                "1m",
+                                                "now"
+                                            ]
+                                        },
+                                        "reducer": {
+                                            "params": [],
+                                            "type": "last"
+                                        },
+                                        "type": "query"
+                                    }
+                                ],
+                                "executionErrorState": "alerting",
+                                "frequency": "60s",
+                                "handler": 1,
+                                "message": "Possible new User",
+                                "name": "New User Posts Alert",
+                                "noDataState": "no_data",
+                                "notifications": []
+                            },
+                            "aliasColors": {},
+                            "bars": False,
+                            "datasource": "${DS_DATASOURCE}",
+                            "editable": True,
+                            "error": False,
+                            "fill": 1,
+                            "grid": {},
+                            "id": 7,
+                            "legend": {
+                                "avg": False,
+                                "current": False,
+                                "max": False,
+                                "min": False,
+                                "show": True,
+                                "total": False,
+                                "values": False
+                            },
+                            "lines": True,
+                            "linewidth": 2,
+                            "links": [],
+                            "nullPointMode": "null",
+                            "percentage": False,
+                            "pointradius": 5,
+                            "points": False,
+                            "renderer": "flot",
+                            "seriesOverrides": [],
+                            "span": 4,
+                            "stack": False,
+                            "steppedLine": False,
+                            "targets": [
+                                {
+                                    "refId": "A",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.getUser.count, 'getUserById')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "B",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.getUserByEmail.count, 'getUserByEmail')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "C",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.postUser.count, 'postUser')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "D",
+                                    "target": "alias(scale(stats.gauges.recipe-service.com.poorknight.api.UserEndpoint.postUser.m1_rate, 100), 'New Users per Minute')",
+                                    "textEditor": False
+                                }
+                            ],
+                            "thresholds": [
+                                {
+                                    "colorMode": "critical",
+                                    "fill": True,
+                                    "line": True,
+                                    "op": "gt",
+                                    "value": 0
+                                }
+                            ],
+                            "timeFrom": None,
+                            "timeShift": None,
+                            "title": "User Hit Count",
+                            "tooltip": {
+                                "shared": True,
+                                "sort": 0,
+                                "value_type": "cumulative"
+                            },
+                            "type": "graph",
+                            "xaxis": {
+                                "mode": "time",
+                                "name": None,
+                                "show": True,
+                                "values": []
+                            },
+                            "yaxes": [
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                },
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                }
+                            ]
+                        }
+                    ],
+                    "repeat": None,
+                    "repeatIteration": None,
+                    "repeatRowId": None,
+                    "showTitle": False,
+                    "title": "New row",
+                    "titleSize": "h6"
+                },
+                {
+                    "collapse": False,
+                    "height": "250px",
+                    "panels": [
+                        {
+                            "NonePointMode": "connected",
+                            "aliasColors": {},
+                            "bars": False,
+                            "datasource": "${DS_DATASOURCE}",
+                            "editable": True,
+                            "error": False,
+                            "fill": 1,
+                            "grid": {},
+                            "id": 8,
+                            "legend": {
+                                "avg": False,
+                                "current": False,
+                                "max": False,
+                                "min": False,
+                                "show": True,
+                                "total": False,
+                                "values": False
+                            },
+                            "lines": True,
+                            "linewidth": 2,
+                            "links": [],
+                            "nullPointMode": "null",
+                            "percentage": False,
+                            "pointradius": 5,
+                            "points": False,
+                            "renderer": "flot",
+                            "seriesOverrides": [],
+                            "span": 4,
+                            "stack": False,
+                            "steppedLine": False,
+                            "targets": [
+                                {
+                                    "refId": "A",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeBookEndpoint.getRecipeBook.mean, 'getRecipeBook')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "B",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeBookEndpoint.postIdToRecipeBook.mean, 'postIdToRecipeBook')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "C",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeBookEndpoint.deleteRecipeFromBook.mean, 'deleteRecipeFromBook')",
+                                    "textEditor": False
+                                }
+                            ],
+                            "thresholds": [],
+                            "timeFrom": None,
+                            "timeShift": None,
+                            "title": "RecipeBook Mean Response Time",
+                            "tooltip": {
+                                "shared": True,
+                                "sort": 0,
+                                "value_type": "cumulative"
+                            },
+                            "type": "graph",
+                            "xaxis": {
+                                "mode": "time",
+                                "name": None,
+                                "show": True,
+                                "values": []
+                            },
+                            "yaxes": [
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                },
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                }
+                            ]
+                        },
+                        {
+                            "NonePointMode": "connected",
+                            "aliasColors": {},
+                            "bars": False,
+                            "datasource": "${DS_DATASOURCE}",
+                            "editable": True,
+                            "error": False,
+                            "fill": 1,
+                            "grid": {},
+                            "id": 9,
+                            "legend": {
+                                "avg": False,
+                                "current": False,
+                                "max": False,
+                                "min": False,
+                                "show": True,
+                                "total": False,
+                                "values": False
+                            },
+                            "lines": True,
+                            "linewidth": 2,
+                            "links": [],
+                            "nullPointMode": "null",
+                            "percentage": False,
+                            "pointradius": 5,
+                            "points": False,
+                            "renderer": "flot",
+                            "seriesOverrides": [],
+                            "span": 4,
+                            "stack": False,
+                            "steppedLine": False,
+                            "targets": [
+                                {
+                                    "refId": "A",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeBookEndpoint.getRecipeBook.p999, 'getRecipeBook')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "B",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeBookEndpoint.postIdToRecipeBook.p999, 'postIdToRecipeBook')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "C",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeBookEndpoint.deleteRecipeFromBook.p999, 'deleteRecipeFromBook')",
+                                    "textEditor": False
+                                }
+                            ],
+                            "thresholds": [],
+                            "timeFrom": None,
+                            "timeShift": None,
+                            "title": "RecipeBook P999",
+                            "tooltip": {
+                                "shared": True,
+                                "sort": 0,
+                                "value_type": "cumulative"
+                            },
+                            "type": "graph",
+                            "xaxis": {
+                                "mode": "time",
+                                "name": None,
+                                "show": True,
+                                "values": []
+                            },
+                            "yaxes": [
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                },
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                }
+                            ]
+                        },
+                        {
+                            "NonePointMode": "connected",
+                            "aliasColors": {},
+                            "bars": False,
+                            "datasource": "${DS_DATASOURCE}",
+                            "editable": True,
+                            "error": False,
+                            "fill": 1,
+                            "grid": {},
+                            "id": 10,
+                            "legend": {
+                                "avg": False,
+                                "current": False,
+                                "max": False,
+                                "min": False,
+                                "show": True,
+                                "total": False,
+                                "values": False
+                            },
+                            "lines": True,
+                            "linewidth": 2,
+                            "links": [],
+                            "nullPointMode": "null",
+                            "percentage": False,
+                            "pointradius": 5,
+                            "points": False,
+                            "renderer": "flot",
+                            "seriesOverrides": [],
+                            "span": 4,
+                            "stack": False,
+                            "steppedLine": False,
+                            "targets": [
+                                {
+                                    "refId": "A",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeBookEndpoint.getRecipeBook.count, 'getRecipeBook')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "B",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeBookEndpoint.postIdToRecipeBook.count, 'postIdToRecipeBook')",
+                                    "textEditor": False
+                                },
+                                {
+                                    "refId": "C",
+                                    "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeBookEndpoint.deleteRecipeFromBook.count, 'deleteRecipeFromBook')",
+                                    "textEditor": False
+                                }
+                            ],
+                            "thresholds": [],
+                            "timeFrom": None,
+                            "timeShift": None,
+                            "title": "RecipeBook Count",
+                            "tooltip": {
+                                "shared": True,
+                                "sort": 0,
+                                "value_type": "cumulative"
+                            },
+                            "type": "graph",
+                            "xaxis": {
+                                "mode": "time",
+                                "name": None,
+                                "show": True,
+                                "values": []
+                            },
+                            "yaxes": [
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                },
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                }
+                            ]
+                        }
+                    ],
+                    "repeat": None,
+                    "repeatIteration": None,
+                    "repeatRowId": None,
+                    "showTitle": False,
+                    "title": "New row",
+                    "titleSize": "h6"
+                },
+                {
+                    "collapse": False,
+                    "height": "250px",
+                    "panels": [
+                        {
+                            "NonePointMode": "connected",
+                            "aliasColors": {},
+                            "bars": False,
+                            "datasource": "${DS_DATASOURCE}",
+                            "editable": True,
+                            "error": False,
+                            "fill": 1,
+                            "grid": {},
+                            "id": 1,
+                            "legend": {
+                                "avg": False,
+                                "current": False,
+                                "max": False,
+                                "min": False,
+                                "show": True,
+                                "total": False,
+                                "values": False
+                            },
+                            "lines": True,
+                            "linewidth": 2,
+                            "links": [],
+                            "nullPointMode": "null",
+                            "percentage": False,
+                            "pointradius": 5,
+                            "points": False,
+                            "renderer": "flot",
+                            "seriesOverrides": [],
+                            "span": 12,
+                            "stack": False,
+                            "steppedLine": False,
+                            "targets": [
+                                {
+                                    "refId": "A",
+                                    "target": "stats.counters.statsd.bad_lines_seen.count"
+                                },
+                                {
+                                    "refId": "B",
+                                    "target": "stats.counters.statsd.packets_received.rate"
+                                }
+                            ],
+                            "thresholds": [],
+                            "timeFrom": None,
+                            "timeShift": None,
+                            "title": "StatsD Received Data",
+                            "tooltip": {
+                                "shared": True,
+                                "sort": 0,
+                                "value_type": "cumulative"
+                            },
+                            "type": "graph",
+                            "xaxis": {
+                                "mode": "time",
+                                "name": None,
+                                "show": True,
+                                "values": []
+                            },
+                            "yaxes": [
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                },
+                                {
+                                    "format": "short",
+                                    "logBase": 1,
+                                    "max": None,
+                                    "min": None,
+                                    "show": True
+                                }
+                            ]
+                        }
+                    ],
+                    "repeat": None,
+                    "repeatIteration": None,
+                    "repeatRowId": None,
+                    "showTitle": False,
+                    "title": "Row",
+                    "titleSize": "h6"
+                }
+            ],
+            "schemaVersion": 14,
+            "style": "dark",
+            "tags": [],
+            "templating": {
+                "list": []
             },
-            {
-                "collapse": False,
-                "editable": True,
-                "height": "250px",
-                "panels": [
-                    {
-                        "aliasColors": {},
-                        "bars": False,
-                        "datasource": "DataSource",
-                        "editable": True,
-                        "error": False,
-                        "fill": 1,
-                        "grid": {
-                            "leftLogBase": 1,
-                            "leftMax": None,
-                            "leftMin": None,
-                            "rightLogBase": 1,
-                            "rightMax": None,
-                            "rightMin": None,
-                            "threshold1": None,
-                            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-                            "threshold2": None,
-                            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-                        },
-                        "id": 8,
-                        "legend": {
-                            "avg": False,
-                            "current": False,
-                            "max": False,
-                            "min": False,
-                            "show": True,
-                            "total": False,
-                            "values": False
-                        },
-                        "lines": True,
-                        "linewidth": 2,
-                        "links": [],
-                        "NonePointMode": "connected",
-                        "percentage": False,
-                        "pointradius": 5,
-                        "points": False,
-                        "renderer": "flot",
-                        "seriesOverrides": [],
-                        "span": 4,
-                        "stack": False,
-                        "steppedLine": False,
-                        "targets": [
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeBookEndpoint.getRecipeBook.mean, 'getRecipeBook')",
-                                "textEditor": False
-                            },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeBookEndpoint.postIdToRecipeBook.mean, 'postIdToRecipeBook')",
-                                "textEditor": False
-                            },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeBookEndpoint.deleteRecipeFromBook.mean, 'deleteRecipeFromBook')",
-                                "textEditor": False
-                            }
-                        ],
-                        "timeFrom": None,
-                        "timeShift": None,
-                        "title": "RecipeBook Mean Response Time",
-                        "tooltip": {
-                            "shared": True,
-                            "value_type": "cumulative"
-                        },
-                        "type": "graph",
-                        "x-axis": True,
-                        "y-axis": True,
-                        "y_formats": [
-                            "short",
-                            "short"
-                        ]
-                    },
-                    {
-                        "aliasColors": {},
-                        "bars": False,
-                        "datasource": "DataSource",
-                        "editable": True,
-                        "error": False,
-                        "fill": 1,
-                        "grid": {
-                            "leftLogBase": 1,
-                            "leftMax": None,
-                            "leftMin": None,
-                            "rightLogBase": 1,
-                            "rightMax": None,
-                            "rightMin": None,
-                            "threshold1": None,
-                            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-                            "threshold2": None,
-                            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-                        },
-                        "id": 9,
-                        "legend": {
-                            "avg": False,
-                            "current": False,
-                            "max": False,
-                            "min": False,
-                            "show": True,
-                            "total": False,
-                            "values": False
-                        },
-                        "lines": True,
-                        "linewidth": 2,
-                        "links": [],
-                        "NonePointMode": "connected",
-                        "percentage": False,
-                        "pointradius": 5,
-                        "points": False,
-                        "renderer": "flot",
-                        "seriesOverrides": [],
-                        "span": 4,
-                        "stack": False,
-                        "steppedLine": False,
-                        "targets": [
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeBookEndpoint.getRecipeBook.p999, 'getRecipeBook')",
-                                "textEditor": False
-                            },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeBookEndpoint.postIdToRecipeBook.p999, 'postIdToRecipeBook')",
-                                "textEditor": False
-                            },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeBookEndpoint.deleteRecipeFromBook.p999, 'deleteRecipeFromBook')",
-                                "textEditor": False
-                            }
-                        ],
-                        "timeFrom": None,
-                        "timeShift": None,
-                        "title": "RecipeBook P999",
-                        "tooltip": {
-                            "shared": True,
-                            "value_type": "cumulative"
-                        },
-                        "type": "graph",
-                        "x-axis": True,
-                        "y-axis": True,
-                        "y_formats": [
-                            "short",
-                            "short"
-                        ]
-                    },
-                    {
-                        "aliasColors": {},
-                        "bars": False,
-                        "datasource": "DataSource",
-                        "editable": True,
-                        "error": False,
-                        "fill": 1,
-                        "grid": {
-                            "leftLogBase": 1,
-                            "leftMax": None,
-                            "leftMin": None,
-                            "rightLogBase": 1,
-                            "rightMax": None,
-                            "rightMin": None,
-                            "threshold1": None,
-                            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-                            "threshold2": None,
-                            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-                        },
-                        "id": 10,
-                        "legend": {
-                            "avg": False,
-                            "current": False,
-                            "max": False,
-                            "min": False,
-                            "show": True,
-                            "total": False,
-                            "values": False
-                        },
-                        "lines": True,
-                        "linewidth": 2,
-                        "links": [],
-                        "NonePointMode": "connected",
-                        "percentage": False,
-                        "pointradius": 5,
-                        "points": False,
-                        "renderer": "flot",
-                        "seriesOverrides": [],
-                        "span": 4,
-                        "stack": False,
-                        "steppedLine": False,
-                        "targets": [
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeBookEndpoint.getRecipeBook.count, 'getRecipeBook')",
-                                "textEditor": False
-                            },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeBookEndpoint.postIdToRecipeBook.count, 'postIdToRecipeBook')",
-                                "textEditor": False
-                            },
-                            {
-                                "target": "alias(stats.gauges.recipe-service.com.poorknight.api.RecipeBookEndpoint.deleteRecipeFromBook.count, 'deleteRecipeFromBook')",
-                                "textEditor": False
-                            }
-                        ],
-                        "timeFrom": None,
-                        "timeShift": None,
-                        "title": "RecipeBook Count",
-                        "tooltip": {
-                            "shared": True,
-                            "value_type": "cumulative"
-                        },
-                        "type": "graph",
-                        "x-axis": True,
-                        "y-axis": True,
-                        "y_formats": [
-                            "short",
-                            "short"
-                        ]
-                    }
-                ],
-                "title": "New row"
+            "time": {
+                "from": "now-24h",
+                "to": "now"
             },
-            {
-                "collapse": False,
-                "editable": True,
-                "height": "250px",
-                "panels": [
-                    {
-                        "aliasColors": {},
-                        "bars": False,
-                        "datasource": "DataSource",
-                        "editable": True,
-                        "error": False,
-                        "fill": 1,
-                        "grid": {
-                            "leftLogBase": 1,
-                            "leftMax": None,
-                            "leftMin": None,
-                            "rightLogBase": 1,
-                            "rightMax": None,
-                            "rightMin": None,
-                            "threshold1": None,
-                            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-                            "threshold2": None,
-                            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-                        },
-                        "id": 1,
-                        "legend": {
-                            "avg": False,
-                            "current": False,
-                            "max": False,
-                            "min": False,
-                            "show": True,
-                            "total": False,
-                            "values": False
-                        },
-                        "lines": True,
-                        "linewidth": 2,
-                        "links": [],
-                        "NonePointMode": "connected",
-                        "percentage": False,
-                        "pointradius": 5,
-                        "points": False,
-                        "renderer": "flot",
-                        "seriesOverrides": [],
-                        "span": 12,
-                        "stack": False,
-                        "steppedLine": False,
-                        "targets": [
-                            {
-                                "target": "stats.counters.statsd.bad_lines_seen.count"
-                            },
-                            {
-                                "target": "stats.counters.statsd.packets_received.rate"
-                            }
-                        ],
-                        "timeFrom": None,
-                        "timeShift": None,
-                        "title": "StatsD Received Data",
-                        "tooltip": {
-                            "shared": True,
-                            "value_type": "cumulative"
-                        },
-                        "type": "graph",
-                        "x-axis": True,
-                        "y-axis": True,
-                        "y_formats": [
-                            "short",
-                            "short"
-                        ]
-                    }
-                ],
-                "title": "Row"
-            }
-        ],
-        "nav": [
-            {
+            "timepicker": {
                 "collapse": False,
                 "enable": True,
                 "notice": False,
@@ -856,22 +1073,12 @@ dashboard_post = session.post(
                     "30d"
                 ],
                 "type": "timepicker"
-            }
-        ],
-        "time": {
-            "from": "now-1h",
-            "to": "now"
-        },
-        "templating": {
-            "list": []
-        },
-        "annotations": {
-            "list": []
-        },
-        "schemaVersion": 6,
-        "version": 38,
-        "links": []
-    }}),
+            },
+            "timezone": "browser",
+            "title": "Recipe",
+            "version": 4
+        }
+    ),
     headers={'content-type': 'application/json'}
 )
 
