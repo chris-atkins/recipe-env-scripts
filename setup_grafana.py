@@ -558,40 +558,7 @@ dashboard_post = session.post(
                         },
                         {
                             "NonePointMode": "connected",
-                            "alert": {
-                                "conditions": [
-                                    {
-                                        "evaluator": {
-                                            "params": [
-                                                0
-                                            ],
-                                            "type": "gt"
-                                        },
-                                        "operator": {
-                                            "type": "and"
-                                        },
-                                        "query": {
-                                            "params": [
-                                                "D",
-                                                "1m",
-                                                "now"
-                                            ]
-                                        },
-                                        "reducer": {
-                                            "params": [],
-                                            "type": "last"
-                                        },
-                                        "type": "query"
-                                    }
-                                ],
-                                "executionErrorState": "alerting",
-                                "frequency": "60s",
-                                "handler": 1,
-                                "message": "Possible new User",
-                                "name": "New User Posts Alert",
-                                "noDataState": "no_data",
-                                "notifications": []
-                            },
+                           
                             "aliasColors": {},
                             "bars": False,
                             "datasource": "${DS_DATASOURCE}",
