@@ -63,6 +63,7 @@ dashboard_post = session.post(
     os.path.join(grafana_url, 'api', 'dashboards', 'db'),
     data=json.dumps(
         {
+        "dashboard": {
             "__inputs": [
                 {
                     "name": "DS_DATASOURCE",
@@ -1078,6 +1079,7 @@ dashboard_post = session.post(
             "title": "Recipe",
             "version": 4
         }
+    }
     ),
     headers={'content-type': 'application/json'}
 )
