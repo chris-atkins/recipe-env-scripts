@@ -9,7 +9,7 @@ token = os.environ['TOKEN']
 headers = {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token}
 
 def create_new_server(server_name, server_size):
-    post_data={"name":server_name,"region":"nyc3","size":server_size,"image":"docker-18-04","ssh_keys":["1734160"],"backups":False,"ipv6":False,"user_data":None,"private_networking":None}
+    post_data={"name":server_name,"region":"nyc3","size":server_size,"image":"docker","ssh_keys":["1734160"],"backups":False,"ipv6":False,"user_data":None,"private_networking":None}
     new_server_response = requests.post('https://api.digitalocean.com/v2/droplets', json=post_data, headers=headers);
     print('Build server ' + server_name + ' responded with ' + str(new_server_response.status_code))
 #     print(new_server_response.text)
