@@ -16,8 +16,8 @@ def create_new_server(server_name, server_size):
     return str(new_server_response.json()['droplet']['id'])
 
 
-test_recipe_service_id = create_new_server(server_name='TEST-ENV-RECIPE-SERVICE', server_size="1gb")
-test_recipe_web_id = create_new_server(server_name='TEST-ENV-RECIPE-WEB', server_size="2gb")
+test_recipe_service_id = create_new_server(server_name='TEST-ENV-RECIPE-SERVICE', server_size="2gb")
+test_recipe_web_id = create_new_server(server_name='TEST-ENV-RECIPE-WEB', server_size="4gb")
 
 
 all_servers_ready = False
